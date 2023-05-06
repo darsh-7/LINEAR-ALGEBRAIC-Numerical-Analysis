@@ -63,6 +63,7 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
+            this.Partial = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // button1
@@ -421,11 +422,22 @@
             this.button4.UseVisualStyleBackColor = false;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
+            // Partial
+            // 
+            this.Partial.AutoSize = true;
+            this.Partial.Location = new System.Drawing.Point(462, 67);
+            this.Partial.Name = "Partial";
+            this.Partial.Size = new System.Drawing.Size(55, 17);
+            this.Partial.TabIndex = 55;
+            this.Partial.Text = "Partial";
+            this.Partial.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(617, 447);
+            this.Controls.Add(this.Partial);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
@@ -505,6 +517,7 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.CheckBox Partial;
     }
 }
 

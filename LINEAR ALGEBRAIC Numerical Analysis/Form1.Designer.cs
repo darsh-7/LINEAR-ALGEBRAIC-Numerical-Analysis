@@ -425,7 +425,7 @@
             // Partial
             // 
             this.Partial.AutoSize = true;
-            this.Partial.Location = new System.Drawing.Point(462, 67);
+            this.Partial.Location = new System.Drawing.Point(487, 34);
             this.Partial.Name = "Partial";
             this.Partial.Size = new System.Drawing.Size(55, 17);
             this.Partial.TabIndex = 55;

@@ -19,32 +19,32 @@ namespace LINEAR_ALGEBRAIC_Numerical_Analysis
         {
             flowLayoutPanel1.Controls.Clear();
 
-            //try
-            //{
-            //    double[,] Matrix = { { double.Parse(x11.Text), double.Parse(x12.Text), double.Parse(x13.Text) },
-            //                          { double.Parse(x21.Text), double.Parse(x22.Text), double.Parse(x23.Text) },
-            //                          { double.Parse(x31.Text), double.Parse(x32.Text), double.Parse(x33.Text) } };
+            try
+            {
+                double[,] Matrix = { { double.Parse(x11.Text), double.Parse(x12.Text), double.Parse(x13.Text) },
+                                      { double.Parse(x21.Text), double.Parse(x22.Text), double.Parse(x23.Text) },
+                                      { double.Parse(x31.Text), double.Parse(x32.Text), double.Parse(x33.Text) } };
 
-            //    double[] tTest = { double.Parse(a.Text), double.Parse(b.Text), double.Parse(c.Text) };
-            //}
-            //catch (Exception)
-            //{
-            //    MessageBox.Show("pls enter vald data");
-            //    return;
-            //}
+                double[] tTest = { double.Parse(a.Text), double.Parse(b.Text), double.Parse(c.Text) };
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("pls enter vald data");
+                return;
+            }
 
-            //double[,] tMatrix = { { double.Parse(x11.Text), double.Parse(x12.Text), double.Parse(x13.Text) },
-            //                          { double.Parse(x21.Text), double.Parse(x22.Text), double.Parse(x23.Text) },
-            //                          { double.Parse(x31.Text), double.Parse(x32.Text), double.Parse(x33.Text) } };
+            double[,] tMatrix = { { double.Parse(x11.Text), double.Parse(x12.Text), double.Parse(x13.Text) },
+                                      { double.Parse(x21.Text), double.Parse(x22.Text), double.Parse(x23.Text) },
+                                      { double.Parse(x31.Text), double.Parse(x32.Text), double.Parse(x33.Text) } };
 
-            //double[] Test = { double.Parse(a.Text), double.Parse(b.Text), double.Parse(c.Text) };
+            double[] Test = { double.Parse(a.Text), double.Parse(b.Text), double.Parse(c.Text) };
 
-            double[,] tMatrix = {   { 2,1,-1},
-                                    { 5,2,2},
-                                    { 3,1,1}
-            };
+            //double[,] tMatrix = {   { 2,1,-1},
+            //                        { 5,2,2},
+            //                        { 3,1,1}
+            //};
 
-            double[] Test = { 1, -4, 5 };
+            //double[] Test = { 1, -4, 5 };
 
             double[] reuselt = { 0, 0, 0 };
             switch (method)
@@ -130,21 +130,22 @@ namespace LINEAR_ALGEBRAIC_Numerical_Analysis
                                 { A[2, 0], A[2,1], A[2,2] ,B[2]}
             };
             //Partial 
-            if (Partial.Checked && matrix[1, 0] > matrix[0, 0]&& matrix[1, 0] > matrix[2, 0] )
+            if (Partial.Checked && Math.Abs(matrix[1, 0]) > Math.Abs(matrix[0, 0])&& Math.Abs(matrix[1, 0]) > Math.Abs(matrix[2, 0]) )
             {
                 matrix = swapRows(matrix, 1, 0);
                 addStep(matrix, method, $"swap 1->2");
             }
-            else if (Partial.Checked && matrix[2, 0] > matrix[0, 0] && matrix[2, 0] > matrix[1, 0])
+            else if (Partial.Checked && Math.Abs(matrix[2, 0]) > Math.Abs(matrix[0, 0]) && Math.Abs(matrix[2, 0]) > Math.Abs(matrix[1, 0]))
             {
                 matrix = swapRows(matrix, 2, 0);
                 addStep(matrix, method, $"swap 1->3");
             }
-            if (Partial.Checked && matrix[2, 0] > matrix[1, 0])
+            if (Partial.Checked && Math.Abs(matrix[2, 0]) > Math.Abs(matrix[1, 0]))
             {
                 matrix = swapRows(matrix, 2, 1);
                 addStep(matrix, method, $"swap 2->3");
             }
+            //
             double m21 = matrix[1, 0] / matrix[0, 0];
             double m31 = matrix[2, 0] / matrix[0, 0];
             addStep(matrix, method, $"m21 = {m21}\nm31 = {m31}");
@@ -156,13 +157,14 @@ namespace LINEAR_ALGEBRAIC_Numerical_Analysis
             {
                 matrix[2, i] = matrix[2, i] - (m31 * matrix[0, i]);
             }
+            //Partial 
             addStep(matrix, method);
-            if (Partial.Checked && matrix[2, 1] > matrix[1, 1])
+            if (Partial.Checked && Math.Abs(matrix[2, 1]) > Math.Abs(matrix[1, 1]))
             {
                 matrix = swapRows(matrix, 2, 1);
                 addStep(matrix, method, $"swap 2->3");
             }
-
+            //
             double m32 = matrix[2, 1] / matrix[1, 1];
             addStep(matrix, method, $"m32 = {m32}");
             for (int i = 0; i <= 3; i++)
@@ -195,19 +197,19 @@ namespace LINEAR_ALGEBRAIC_Numerical_Analysis
                                 { A[2, 0], A[2,1], A[2,2] ,B[2]}
             };
             //Partial 
-            if (Partial.Checked && matrix[1, 0] > matrix[0, 0] && matrix[1, 0] > matrix[2, 0])
+            if (Partial.Checked && Math.Abs(matrix[1, 0]) > Math.Abs(matrix[0, 0]) && Math.Abs(matrix[1, 0]) > Math.Abs(matrix[2, 0]))
             {
                 matrix = swapRows(matrix, 1, 0);
                 swapElements(B, 1, 0);
                 addStep(matrix, method, $"swap 1->2");
             }
-            else if (Partial.Checked && matrix[2, 0] > matrix[0, 0] && matrix[2, 0] > matrix[1, 0])
+            else if (Partial.Checked && Math.Abs(matrix[2, 0]) > Math.Abs(matrix[0, 0]) && Math.Abs(matrix[2, 0]) > Math.Abs(matrix[1, 0]))
             {
                 matrix = swapRows(matrix, 2, 0);
                 swapElements(B, 2, 0);
                 addStep(matrix, method, $"swap 1->3");
             }
-            if (Partial.Checked && matrix[2, 0] > matrix[1, 0])
+            if (Partial.Checked && Math.Abs(matrix[2, 0]) > Math.Abs(matrix[1, 0]))
             {
                 matrix = swapRows(matrix, 2, 1);
                 swapElements(B, 2, 1);
@@ -226,7 +228,7 @@ namespace LINEAR_ALGEBRAIC_Numerical_Analysis
                 matrix[2, i] = matrix[2, i] - (m31 * matrix[0, i]);
             }
             addStep(matrix, method);
-            if (Partial.Checked && matrix[2, 1] > matrix[1, 1])
+            if (Partial.Checked && Math.Abs(matrix[2, 1]) > Math.Abs(matrix[1, 1]))
             {
                 matrix = swapRows(matrix, 2, 1);
                 swapElements(B, 2, 1);
@@ -307,19 +309,6 @@ namespace LINEAR_ALGEBRAIC_Numerical_Analysis
                        + matrix[0, 2] * matrix[1, 0] * matrix[2, 1] - matrix[0, 2] * matrix[1, 1] * matrix[2, 0]
                        - matrix[0, 1] * matrix[1, 0] * matrix[2, 2] - matrix[0, 0] * matrix[1, 2] * matrix[2, 1];
 
-            //double[] result = new double[3];
-
-            //result[0] = (vector[0] * matrix[1, 1] * matrix[2, 2] + matrix[0, 1] * matrix[1, 2] * vector[2]
-            //           + matrix[0, 2] * vector[1] * matrix[2, 1] - matrix[0, 2] * matrix[1, 1] * vector[2]
-            //           - matrix[0, 1] * vector[1] * matrix[2, 2] - vector[0] * matrix[1, 2] * matrix[2, 1]) / det;
-
-            //result[1] = (matrix[0, 0] * vector[1] * matrix[2, 2] + vector[0] * matrix[1, 2] * matrix[2, 0]
-            //           + matrix[0, 2] * matrix[1, 0] * vector[2] - matrix[0, 2] * vector[1] * matrix[2, 0]
-            //           - vector[0] * matrix[1, 0] * matrix[2, 2] - matrix[0, 0] * matrix[1, 2] * vector[2]) / det;
-
-            //result[2] = (matrix[0, 0] * matrix[1, 1] * vector[2] + matrix[0, 1] * vector[1] * matrix[2, 0]
-            //           + vector[0] * matrix[1, 0] * matrix[2, 1] - vector[0] * matrix[1, 1] * matrix[2, 0]
-            //           - matrix[0, 1] * matrix[1, 0] * vector[2] - matrix[0, 0] * vector[1] * matrix[2, 1]) / det;
 
             return det;
         }
